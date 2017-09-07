@@ -25,13 +25,13 @@ function getStyles(props, context) {
       position: 'relative',
       width: '100%',
     },
-    icon: {
+    iconButton: {
       fill: accentColor,
       position: 'absolute',
       right: spacing.desktopGutterLess,
       top: (spacing.iconSize - 24) / 2 + spacing.desktopGutterMini / 2,
     },
-    iconChildren: {
+    icon: {
       fill: 'inherit',
     },
     label: {
@@ -121,6 +121,10 @@ class DropDownMenu extends Component {
      * Overrides default `SvgIcon` dropdown arrow component.
      */
     iconButton: PropTypes.node,
+    /**
+     * Overrides the styles of icon button element.
+     */
+    iconButtonStyle: PropTypes.object,
     /**
      * Overrides the styles of icon element.
      */
@@ -371,6 +375,7 @@ class DropDownMenu extends Component {
       children,
       className,
       disabled,
+      iconButtonStyle,
       iconStyle,
       labelStyle,
       listStyle,
@@ -460,8 +465,8 @@ class DropDownMenu extends Component {
             ref={(node) => {
               this.arrowNode = node;
             }}
-            style={Object.assign({}, styles.icon, iconStyle)}
-            iconStyle={styles.iconChildren}
+            style={Object.assign({}, styles.iconButton, iconButtonStyle)}
+            iconStyle={{...styles.icon, ...iconStyle}}
           >
             {iconButton}
           </IconButton>
