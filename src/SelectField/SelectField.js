@@ -178,6 +178,27 @@ class SelectField extends Component {
     muiTheme: PropTypes.object.isRequired,
   };
 
+  constructor(props) {
+    super(props);
+
+    this.state = {};
+    this.state.isOpened = false;
+  }
+
+  onOpen = () => {
+    this.setState({isOpened : true});
+    if (this.props.dropDownMenuProps && this.props.dropDownMenuProps.onOpen) {
+      this.props.dropDownMenuProps.onOpen()
+    }
+  }
+
+  onClose = () => {
+    this.setState({isOpened : false});
+    if (this.props.dropDownMenuProps && this.props.dropDownMenuProps.onClose) {
+      this.props.dropDownMenuProps.onClose()
+    }
+  }
+
   render() {
     const {
       autoWidth,
@@ -215,6 +236,12 @@ class SelectField extends Component {
 
     const styles = getStyles(this.props, this.context);
 
+    const {
+      onOpen,
+      onClose,
+      ...otherDropDownMenuProps
+    } = dropDownMenuProps;
+
     return (
       <TextField
         {...other}
@@ -232,6 +259,7 @@ class SelectField extends Component {
         onFocus={onFocus}
         onBlur={onBlur}
         id={id}
+        isFocused={this.state.isOpened}
         underlineDisabledStyle={underlineDisabledStyle}
         underlineFocusStyle={underlineFocusStyle}
       >
@@ -250,7 +278,9 @@ class SelectField extends Component {
           maxHeight={maxHeight}
           multiple={multiple}
           selectionRenderer={selectionRenderer}
-          {...dropDownMenuProps}
+          onOpen={this.onOpen}
+          onClose={this.onClose}
+          {...otherDropDownMenuProps}
         >
           {children}
         </DropDownMenu>

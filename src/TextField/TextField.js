@@ -176,6 +176,10 @@ class TextField extends Component {
      */
     inputStyle: PropTypes.object,
     /**
+     * Force focus/blur state
+     */
+    isFocused: PropTypes.bool,
+    /**
      * If true, a textarea element will be rendered.
      * The textarea also grows and shrinks according to the number of lines.
      */
@@ -403,6 +407,7 @@ class TextField extends Component {
       hintStyle,
       id,
       inputStyle,
+      isFocused,
       multiLine,
       onBlur, // eslint-disable-line no-unused-vars
       onChange, // eslint-disable-line no-unused-vars
@@ -429,17 +434,19 @@ class TextField extends Component {
       </div>
     );
 
+    const isFocusedMerged = isFocused === true ? true : (isFocused === false ? false : this.state.isFocused)
+
     const floatingLabelTextElement = floatingLabelText && (
       <TextFieldLabel
         muiTheme={this.context.muiTheme}
         style={Object.assign(
           styles.floatingLabel,
           floatingLabelStyle,
-          this.state.isFocused ? floatingLabelFocusStyle : null
+          isFocusedMerged ? floatingLabelFocusStyle : null
         )}
         shrinkStyle={floatingLabelShrinkStyle}
         htmlFor={inputId}
-        shrink={this.state.hasValue || this.state.isFocused || floatingLabelFixed}
+        shrink={this.state.hasValue || isFocusedMerged || floatingLabelFixed}
         disabled={disabled}
       >
         {floatingLabelText}
@@ -503,8 +510,8 @@ class TextField extends Component {
         {hintText ?
           <TextFieldHint
             muiTheme={this.context.muiTheme}
-            show={!(this.state.hasValue || (floatingLabelText && !this.state.isFocused)) ||
-                  (!this.state.hasValue && floatingLabelText && floatingLabelFixed && !this.state.isFocused)}
+            show={!(this.state.hasValue || (floatingLabelText && !isFocusedMerged)) ||
+                  (!this.state.hasValue && floatingLabelText && floatingLabelFixed && !isFocusedMerged)}
             style={hintStyle}
             text={hintText}
           /> :
@@ -517,7 +524,7 @@ class TextField extends Component {
             disabledStyle={underlineDisabledStyle}
             error={!!this.state.errorText}
             errorStyle={errorStyle}
-            focus={this.state.isFocused}
+            focus={isFocusedMerged}
             focusStyle={underlineFocusStyle}
             muiTheme={this.context.muiTheme}
             style={underlineStyle}
