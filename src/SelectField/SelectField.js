@@ -236,12 +236,6 @@ class SelectField extends Component {
 
     const styles = getStyles(this.props, this.context);
 
-    const {
-      onOpen,
-      onClose,
-      ...otherDropDownMenuProps
-    } = dropDownMenuProps;
-
     return (
       <TextField
         {...other}
@@ -280,7 +274,7 @@ class SelectField extends Component {
           selectionRenderer={selectionRenderer}
           onOpen={this.onOpen}
           onClose={this.onClose}
-          {...otherDropDownMenuProps}
+          {...dropDownMenuProps}
         >
           {children}
         </DropDownMenu>
