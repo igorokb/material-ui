@@ -130,8 +130,6 @@ class Popover extends Component {
     this.handleResize = throttle(this.setPlacement, 100);
     this.handleScroll = throttle(this.setPlacement.bind(this, true), 50);
 
-    this.popoverRefs = {};
-
     this.state = {
       open: props.open,
       closing: false,
@@ -139,7 +137,7 @@ class Popover extends Component {
   }
 
   componentDidMount() {
-    this.placementTimeout = setTimeout(this.setPlacement);
+    this.setPlacement();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -175,18 +173,12 @@ class Popover extends Component {
   }
 
   componentDidUpdate() {
-    clearTimeout(this.placementTimeout);
-    this.placementTimeout = setTimeout(this.setPlacement);
+    this.setPlacement();
   }
 
   componentWillUnmount() {
     this.handleResize.cancel();
     this.handleScroll.cancel();
-
-    if (this.placementTimeout) {
-      clearTimeout(this.placementTimeout);
-      this.placementTimeout = null;
-    }
 
     if (this.timeout) {
       clearTimeout(this.timeout);
@@ -293,11 +285,11 @@ class Popover extends Component {
       return;
     }
 
-    if (!this.popoverRefs.layer.getLayer()) {
+    if (!this.refs.layer.getLayer()) {
       return;
     }
 
-    const targetEl = this.popoverRefs.layer.getLayer().children[0];
+    const targetEl = this.refs.layer.getLayer().children[0];
     if (!targetEl) {
       return;
     }
@@ -418,7 +410,7 @@ class Popover extends Component {
           onResize={this.handleResize}
         />
         <RenderToLayer
-          ref={(ref) => this.popoverRefs.layer = ref}
+          ref="layer"
           open={this.state.open}
           componentClickAway={this.componentClickAway}
           useLayerForClickAway={this.props.useLayerForClickAway}

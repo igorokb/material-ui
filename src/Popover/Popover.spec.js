@@ -31,12 +31,9 @@ describe('<Popover />', () => {
     it('should stop listening correctly', (done) => {
       const wrapper = mountWithContext(<Popover open={true} />);
 
-      // Ensure layering has been set up correctly before simulation
-      setTimeout(() => {
-        wrapper.instance().handleScroll();
-        wrapper.instance().handleScroll();
-        wrapper.unmount();
-      }, 10);
+      wrapper.instance().handleScroll();
+      wrapper.instance().handleScroll();
+      wrapper.unmount();
 
       setTimeout(() => {
          // Wait for the end of the throttle. Makes sure we don't crash.
