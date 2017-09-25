@@ -41,7 +41,7 @@ class InkBar extends Component {
     const styles = getStyles(this.props, this.context);
 
     return (
-      <div style={prepareStyles(Object.assign(styles.root, style))} />
+      <div style={prepareStyles(Object.assign(styles.root, style))}>{this.props.children}</div>
     );
   }
 }

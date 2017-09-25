@@ -46,6 +46,11 @@ class Tabs extends Component {
      * Override the inline-styles of the InkBar.
      */
     inkBarStyle: PropTypes.object,
+
+    /**
+     * The specified element will be injected inside the inkBar component
+     */
+    inkBarChildElement: PropTypes.element,
     /**
      * Called when the selected value change.
      */
@@ -174,6 +179,7 @@ class Tabs extends Component {
       contentContainerStyle,
       initialSelectedIndex, // eslint-disable-line no-unused-vars
       inkBarStyle,
+      inkBarChildElement,
       onChange, // eslint-disable-line no-unused-vars
       style,
       tabItemContainerStyle,
@@ -222,7 +228,9 @@ class Tabs extends Component {
         left={`${width * realSelectedIndex}%`}
         width={`${width}%`}
         style={inkBarStyle}
-      />
+      >
+        {inkBarChildElement ? inkBarChildElement : null}
+      </InkBar>
     ) : null;
 
     const inkBarContainerWidth = tabItemContainerStyle ?
