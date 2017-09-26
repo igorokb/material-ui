@@ -98,6 +98,10 @@ class IconMenu extends Component {
      */
     open: PropTypes.bool,
     /**
+     * Overrides the styles of `Popover` component
+     */
+    popoverStyle: PropTypes.object,
+    /**
      * Override the inline-styles of the root element.
      */
     style: PropTypes.object,
@@ -244,6 +248,7 @@ class IconMenu extends Component {
       onMouseUp,
       onRequestChange, // eslint-disable-line no-unused-vars
       onClick,
+      popoverStyle,
       listStyle,
       menuStyle,
       style,
@@ -326,6 +331,7 @@ You should wrapped it with an <IconButton />.`);
           animated={animated}
           animation={animation}
           context={this.context}
+          style={popoverStyle}
         >
           {menu}
         </Popover>

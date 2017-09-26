@@ -178,6 +178,10 @@ class DropDownMenu extends Component {
      */
     openImmediately: PropTypes.bool,
     /**
+     * Overrides the styles of `Popover` component
+     */
+    popoverStyle: PropTypes.object,
+    /**
      * Override the inline-styles of selected menu items.
      */
     selectedMenuItemStyle: PropTypes.object,
@@ -386,6 +390,7 @@ class DropDownMenu extends Component {
       onOpen, // eslint-disable-line no-unused-vars
       openImmediately, // eslint-disable-line no-unused-vars
       menuItemStyle,
+      popoverStyle,
       selectedMenuItemStyle,
       style,
       underlineStyle,
@@ -480,6 +485,7 @@ class DropDownMenu extends Component {
           open={open}
           animated={animated}
           onRequestClose={this.handleRequestCloseMenu}
+          style={popoverStyle}
         >
           <Menu
             multiple={multiple}
