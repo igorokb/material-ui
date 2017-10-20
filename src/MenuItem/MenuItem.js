@@ -313,9 +313,9 @@ class MenuItem extends Component {
 
     return (
       <ListItem
+        hoverColor={this.context.muiTheme.menuItem.hoverColor}
         {...other}
         disabled={disabled}
-        hoverColor={this.context.muiTheme.menuItem.hoverColor}
         innerDivStyle={mergedInnerDivStyles}
         insetChildren={insetChildren}
         leftIcon={leftIconElement}
