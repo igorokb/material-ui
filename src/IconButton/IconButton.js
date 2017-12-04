@@ -289,7 +289,7 @@ class IconButton extends Component {
       );
     }
 
-    const childrenStyle = disabled ? Object.assign({}, iconStyle, styles.disabled) : iconStyle;
+    const childrenStyle = disabled ? Object.assign({}, styles.disabled, iconStyle) : iconStyle;
 
     return (
       <EnhancedButton
