@@ -113,6 +113,10 @@ class MenuItem extends Component {
      */
     leftIcon: PropTypes.element,
     /**
+     * ListItem component custom props
+     */
+    listItemProps: PropTypes.object,
+    /**
      * `MenuItem` elements to nest within the menu item.
      */
     menuItems: PropTypes.node,
@@ -248,6 +252,7 @@ class MenuItem extends Component {
       innerDivStyle,
       insetChildren,
       leftIcon,
+      listItemProps,
       menuItems,
       rightIcon,
       secondaryText,
@@ -323,6 +328,7 @@ class MenuItem extends Component {
         rightIcon={rightIconElement}
         role="menuitem"
         style={mergedRootStyles}
+        {...listItemProps}
       >
         {children}
         {secondaryTextElement}
