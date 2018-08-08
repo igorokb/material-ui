@@ -1,6 +1,6 @@
 import {Component} from 'react';
 import PropTypes from 'prop-types';
-import {unstable_renderSubtreeIntoContainer, unmountComponentAtNode} from 'react-dom';
+import ReactDOM, {unstable_renderSubtreeIntoContainer, unmountComponentAtNode} from 'react-dom';
 
 import Dom from '../utils/dom';
 
@@ -111,7 +111,11 @@ class RenderToLayer extends Component {
       }
 
       const layerElement = render();
-      this.layerElement = unstable_renderSubtreeIntoContainer(this, layerElement, this.layer);
+      if (ReactDOM && ReactDOM.createPortal) {
+        this.layerElement = ReactDOM.createPortal(layerElement, this.layer)
+      } else {
+        this.layerElement = unstable_renderSubtreeIntoContainer(this, layerElement, this.layer);
+      }
     } else {
       this.unrenderLayer();
     }
