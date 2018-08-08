@@ -46,7 +46,6 @@ class EnhancedTextarea extends Component {
     style: PropTypes.object,
     textareaStyle: PropTypes.object,
     value: PropTypes.string,
-    valueLink: PropTypes.object,
   };
 
   static defaultProps = {
@@ -134,10 +133,6 @@ class EnhancedTextarea extends Component {
       this.syncHeightWithShadow(event.target.value);
     }
 
-    if (this.props.hasOwnProperty('valueLink')) {
-      this.props.valueLink.requestChange(event.target.value);
-    }
-
     if (this.props.onChange) {
       this.props.onChange(event);
     }
@@ -153,7 +148,6 @@ class EnhancedTextarea extends Component {
       style,
       hintText, // eslint-disable-line no-unused-vars
       textareaStyle,
-      valueLink, // eslint-disable-line no-unused-vars
       ...other
     } = this.props;
 
@@ -162,10 +156,6 @@ class EnhancedTextarea extends Component {
     const rootStyles = Object.assign(styles.root, style);
     const textareaStyles = Object.assign(styles.textarea, textareaStyle);
     const shadowStyles = Object.assign({}, textareaStyles, styles.shadow, shadowStyle);
-
-    if (this.props.hasOwnProperty('valueLink')) {
-      other.value = this.props.valueLink.value;
-    }
 
     return (
       <div style={prepareStyles(rootStyles)}>
@@ -178,7 +168,6 @@ class EnhancedTextarea extends Component {
           defaultValue={this.props.defaultValue}
           readOnly={true}
           value={this.props.value}
-          valueLink={this.props.valueLink}
         />
         <textarea
           {...other}
