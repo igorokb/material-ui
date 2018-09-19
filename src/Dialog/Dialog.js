@@ -161,6 +161,7 @@ class DialogInline extends Component {
     className: PropTypes.string,
     contentClassName: PropTypes.string,
     contentStyle: PropTypes.object,
+    minVerticalMargin: PropTypes.number,
     modal: PropTypes.bool,
     onRequestClose: PropTypes.func,
     open: PropTypes.bool.isRequired,
@@ -193,6 +194,7 @@ class DialogInline extends Component {
       autoDetectWindowHeight,
       autoScrollBodyContent,
       bodyStyle,
+      minVerticalMargin,
       open,
       repositionOnUpdate,
       title,
@@ -226,7 +228,7 @@ class DialogInline extends Component {
     if (autoDetectWindowHeight || autoScrollBodyContent) {
       const styles = getStyles(this.props, this.context);
       styles.body = Object.assign(styles.body, bodyStyle);
-      let maxDialogContentHeight = clientHeight - 2 * 64;
+      let maxDialogContentHeight = clientHeight - 2 * minVerticalMargin;
 
       if (title) maxDialogContentHeight -= dialogContent.previousSibling.offsetHeight;
 
@@ -414,6 +416,11 @@ class Dialog extends Component {
      */
     contentStyle: PropTypes.object,
     /**
+     * Sets the minimum top and bottom distance from popup edges to window frame.
+     * Affects on popup height.
+     */
+    minVerticalMargin: PropTypes.number,
+    /**
      * Force the user to use one of the actions in the `Dialog`.
      * Clicking outside the `Dialog` will not trigger the `onRequestClose`.
      */
@@ -473,6 +480,7 @@ class Dialog extends Component {
   static defaultProps = {
     autoDetectWindowHeight: true,
     autoScrollBodyContent: false,
+    minVerticalMargin: 64,
     modal: false,
     repositionOnUpdate: true,
   };
