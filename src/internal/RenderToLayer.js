@@ -101,7 +101,7 @@ class RenderToLayer extends Component {
           this.layer.style.bottom = 0;
           this.layer.style.left = 0;
           this.layer.style.right = 0;
-          this.layer.style.zIndex = this.context.muiTheme.zIndex.layer;
+          this.layer.style.zIndex = this.props.layerForClickAwayZIndex || this.context.muiTheme.zIndex.layer;
         } else {
           setTimeout(() => {
             window.addEventListener('touchstart', this.onClickAway);

@@ -94,6 +94,11 @@ class Popover extends Component {
      */
     useLayerForClickAway: PropTypes.bool,
     /**
+     * Makes sense only in case of `useLayerForClickAway` to be true.
+     * Lets to adjust a particular popover root z-index
+     */
+    layerForClickAwayZIndex: PropTypes.number,
+    /**
      * The zDepth of the popover.
      */
     zDepth: propTypes.zDepth,
@@ -118,6 +123,7 @@ class Popover extends Component {
       horizontal: 'left',
     },
     useLayerForClickAway: true,
+    layerForClickAwayZIndex: undefined,
     zDepth: 1,
   };
 
@@ -201,6 +207,7 @@ class Popover extends Component {
       style,
       targetOrigin,
       useLayerForClickAway, // eslint-disable-line no-unused-vars
+      layerForClickAwayZIndex, // eslint-disable-line no-unused-vars
       scrollableContainer, // eslint-disable-line no-unused-vars
       ...other
     } = this.props;
@@ -414,6 +421,7 @@ class Popover extends Component {
           open={this.state.open}
           componentClickAway={this.componentClickAway}
           useLayerForClickAway={this.props.useLayerForClickAway}
+          layerForClickAwayZIndex={this.props.layerForClickAwayZIndex}
           render={this.renderLayer}
         />
       </div>
